@@ -15,7 +15,7 @@ from utils.spider import weibo_spider
 
 host1 = 'localhost'
 dbusername = 'root'
-dbpassword1 = 'rootroot'
+dbpassword1 = 'root'
 database1 = 'testdjango'
 
 
