@@ -1,0 +1,49 @@
+nohup: ignoring input
+Traceback (most recent call last):
+  File "D:\Temp\anaconda\lib\site-packages\urllib3\connectionpool.py", line 688, in urlopen
+    conn = self._get_conn(timeout=pool_timeout)
+  File "D:\Temp\anaconda\lib\site-packages\urllib3\connectionpool.py", line 280, in _get_conn
+    return conn or self._new_conn()
+  File "D:\Temp\anaconda\lib\site-packages\urllib3\connectionpool.py", line 979, in _new_conn
+    raise SSLError(
+urllib3.exceptions.SSLError: Can't connect to HTTPS URL because the SSL module is not available.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Temp\anaconda\lib\site-packages\requests\adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "D:\Temp\anaconda\lib\site-packages\urllib3\connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "D:\Temp\anaconda\lib\site-packages\urllib3\util\retry.py", line 573, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='weibo.com', port=443): Max retries exceeded with url: /ajax/side/hotSearch?user-agent=Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F96.0.4664.110+Safari%2F537.36 (Caused by SSLError("Can't connect to HTTPS URL because the SSL module is not available."))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "spider.py", line 34, in <module>
+    start()
+  File "spider.py", line 32, in start
+    schedule.run_pending()
+  File "D:\Temp\anaconda\lib\site-packages\schedule\__init__.py", line 780, in run_pending
+    default_scheduler.run_pending()
+  File "D:\Temp\anaconda\lib\site-packages\schedule\__init__.py", line 100, in run_pending
+    self._run_job(job)
+  File "D:\Temp\anaconda\lib\site-packages\schedule\__init__.py", line 172, in _run_job
+    ret = job.run()
+  File "D:\Temp\anaconda\lib\site-packages\schedule\__init__.py", line 661, in run
+    ret = self.job_func()
+  File "spider.py", line 13, in weibo_spider
+    r = requests.get(url,headers)
+  File "D:\Temp\anaconda\lib\site-packages\requests\api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+  File "D:\Temp\anaconda\lib\site-packages\requests\api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "D:\Temp\anaconda\lib\site-packages\requests\sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "D:\Temp\anaconda\lib\site-packages\requests\sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "D:\Temp\anaconda\lib\site-packages\requests\adapters.py", line 514, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='weibo.com', port=443): Max retries exceeded with url: /ajax/side/hotSearch?user-agent=Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F96.0.4664.110+Safari%2F537.36 (Caused by SSLError("Can't connect to HTTPS URL because the SSL module is not available."))

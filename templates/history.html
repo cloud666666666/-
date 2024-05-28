@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+    <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
+
+            <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+        <script type="text/javascript" src="https://assets.pyecharts.org/assets/themes/purple-passion.js"></script>
+        <script type="text/javascript" src="https://assets.pyecharts.org/assets/jquery.min.js"></script>
+        <script type="text/javascript" src="https://assets.pyecharts.org/assets/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://assets.pyecharts.org/assets/ResizeSensor.js"></script>
+        <link rel="stylesheet" type="text/css" href="../static/css/zhuce.css">
+	<script src="../static/js/jquery.js"></script>
+
+
+
+            <link rel="stylesheet"  href="https://assets.pyecharts.org/assets/jquery-ui.css">
+		<style>
+
+			ul {
+					list-style: none;
+				}
+				a {
+					text-decoration: none;
+				}
+				/*一级菜单样式, 头部导航栏以及登录注册按钮*/
+				.toubu {
+                    z-index: 1000;
+					min-width: 1100px;
+					width: 100%;
+					height: 50px;
+					margin: 0px auto;
+					background-color: black;
+					font-size: 18px;
+					font-family: 微软雅黑;
+
+				}
+				.toubu ul{
+					height: 50px;
+				}
+			   .toubu ul li {
+				   left: 10px;
+			        float: left;
+			        /*包含块*/
+			        position:relative;
+			    }
+			    .toubu ul li a {
+					display: block;
+					font-size: 18px;
+					width: 160px;
+					height: 50px;
+					line-height: 46px;
+					text-align: center;
+					color: white;
+			        }
+
+				.toubu ul li a:hover {
+					color: black;
+				   background-color: aqua;
+				}
+			/*二级菜单样式*/
+			        .toubu ul li ul {
+			        position:absolute;
+			        top:50px;
+			        left:-500px;
+			        display:none;
+
+			        }
+					.toubu ul li ul li {
+					float:none;
+					}
+					.toubu ul li ul li a{
+					background-color: white;
+					font-size: 16px;
+					color: black;
+					/* border-top:1px solid #ccc; */
+					}
+			            /*一级菜单悬停时二级菜单可见*/
+			        .toubu ul li:hover ul {
+			        display:block;
+			        }
+				.img_1{   /*logo图片设置*/
+					position: absolute;
+					float: left;
+					top: 4px;
+					left: 250px;
+				}
+				.logo_1{
+					position: absolute;
+					float: left;
+					top: 9px;
+					font-family: "楷体";
+					font-size: 25px;
+					font-weight: bold;
+
+					left: 335px;
+				}
+
+				.btn_1{   /*登录按钮设置*/
+					position: absolute;
+					float: left;
+					width: 200px;
+					left: 1150px;
+					top: 8px;
+					color: darkslategrey;
+					background-color: white;
+					font-size: 15px;
+					border: 0;
+				}
+
+		</style>
+</head>
+<body>
+    <style>.box { z-index: 999;  } </style>
+
+    <div class="toubu" >
+		    <ul>
+
+		        <li><a href="/index">热榜数据查看</a>
+
+		        </li>
+
+		                <li><a href="/ana">数据分析</a></li>
+                <li><a href="/ciyun">词云图</a></li>
+                    <li><a href="/updatepass">修改密码</a></li>
+		                <li><a href="/">退出登录</a></li>
+                <li><a href="/history">本日热搜榜汇总</a></li>
+
+
+                <li class="weather"><span id="showTime"></span></li>
+                <style>
+                    .weather{
+                        padding: 15px;
+                    }
+                </style>
+
+                 <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #dddddd;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+  </style>
+
+        <script>
+            var t = null;
+            t = setTimeout(time, 1000);
+            function time() {
+                clearTimeout(t);
+                dt = new Date();
+                var y = dt.getFullYear();
+                var mt = dt.getMonth() + 1;
+                var day = dt.getDate();
+                var h = dt.getHours();
+                var m = dt.getMinutes();
+                var s = dt.getSeconds();
+                document.getElementById("showTime").innerHTML = y + "年" + mt + "月" + day + "-" + h + "时" + m + "分" + s + "秒";
+                t = setTimeout(time, 1000);
+            }
+        </script>
+
+		    </ul>
+
+
+		</div>
+
+
+
+<table>
+    <thead>
+      <tr>
+        <th>排名</th>
+        <th>热榜标题</th>
+          <th>折线图</th>
+        <th>类别</th>
+          <th>最高热度</th>
+      </tr>
+    </thead>
+    <tbody>
+       {% for item in  history%}  <!-- 使用循环遍历数组数据 -->
+
+            <tr>
+                <td>{{ item.3}}</td>  <!-- 动态渲染名称 -->
+           <td><a href="https://s.weibo.com/weibo?q={{item.0}}">{{ item.0 }}</a></td>
+           <td><a  href="/zhexian?name={{ item.0 }}" class="button-link">点击查看</a></td>
+           <td>{{ item.1 }}</td>
+           <td>{{ item.2 }}</td>
+
+{% endfor %}
+
+
+            </tr>
+    </tbody>
+  </table>
+
+
+</body>
+</html>

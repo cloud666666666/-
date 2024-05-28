@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            background-image: url('../static/img.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 350px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="password"],
+        button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>注册</h2>
+        {{msg}}
+       <form action="register" method="post" onsubmit="return validatePassword()">
+    <input type="text" placeholder="Full Name" name="username" required><br>
+    <input type="password" placeholder="Password" id="password" name="password" required><br>
+    <input type="password" placeholder="Confirm Password" id="confirm_password" name="confirm_password" required><br>
+    <span id="password_error" style="color: red;"></span><br>
+    <button type="submit">注册</button>
+</form>
+<script>
+function validatePassword() {
+    var password = document.getElementById("password").value;
+    var confirm_password = document.getElementById("confirm_password").value;
+    if (password != confirm_password) {
+        document.getElementById("password_error").textContent = "两次密码输入不一致";
+        return false;
+    }
+}
+</script>
+        <div>
+            <p>已有账号? <a href="/">去登录</a></p>
+        </div>
+    </div>
+</body>
+</html>

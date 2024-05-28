@@ -1,0 +1,9 @@
+nohup: ignoring input
+标题类别收集完成
+['社会新闻', '国内要闻', '音乐', '其它', '影视', '教育', '综艺', '幽默,美食', '幽默', '游戏', '艺人', '体育,社会新闻', '社会正能量']
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
